@@ -27,11 +27,9 @@ def shuo_irfs_spike_position_integration(position_data, spike_data, minimum_time
     # Format each float to 4 decimal places
     df = df.applymap(lambda x: float(f"{x:.4f}"))
 
-    # Example: Add an additional column if needed
-    # df['Additional_Column'] = 'DefaultValue'  # Uncomment and edit this line as needed
-
-    # Save to JSON
-    df.to_json('Spike_Information.json', orient='records', indent=4)
+    spike_data_to_save = {'Spike_Information': df.to_numpy().tolist()}
+    with open('Spike_Information.json', 'w') as f:
+        json.dump(spike_data_to_save, f, indent=4)
 
     return df
 
